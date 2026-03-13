@@ -1222,13 +1222,13 @@ Return JSON:
     return /* @__PURE__ */ React.createElement("div", { style: { margin: "0 14px 8px", padding: "8px 12px", background: C.red + "06", borderRadius: 12, border: "1.5px solid " + C.red + "25" } }, /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 5, marginBottom: 4 } }, /* @__PURE__ */ React.createElement(Ic, { n: "alert", s: 14, c: C.red }), /* @__PURE__ */ React.createElement("span", { style: { fontSize: 12, fontWeight: 700, color: C.red } }, "MEDICATION ALLERGIES")), ma.map((a, i) => /* @__PURE__ */ React.createElement("div", { key: i, style: { display: "flex", justifyContent: "space-between", padding: "3px 0" } }, /* @__PURE__ */ React.createElement("span", { style: { fontSize: 13, fontWeight: 600, color: a.sev === "severe" ? C.red : C.org } }, a.name), /* @__PURE__ */ React.createElement("span", { style: { fontSize: 11, color: C.tx3 } }, a.reaction))));
   };
   const homeContent = tab !== "home" ? null : (() => {
-    const homeTodayBeh = tallies.filter((t) => t.d === today && userHomeIds.includes((residents.find((rx) => rx.id === (t.resId || "r1")) || {}).home || "SCH")).length;
     const userHomeIds = user.homes || ["SCH"];
+    const homeTodayBeh = tallies.filter((t) => t.d === today && userHomeIds.includes((residents.find((rx) => rx.id === (t.resId || "r1")) || {}).home || "SCH")).length;
     const homeAllActiveMeds = meds.filter((m) => m && m.status === "active" && userHomeIds.includes((residents.find((rx) => rx.id === m.resId) || {}).home || "SCH") && m.freq !== "PRN" && !isOnHV(m.resId));
     const homeAllGiven = homeAllActiveMeds.length > 0 && homeAllActiveMeds.every((m) => m.times.every((t) => marRecs.find((mr) => mr.med === m.name && mr.d === today && mr.sTime === t)));
     const homeNextMed = getNextMedTime(meds.filter((m) => m && userHomeIds.includes((residents.find((rx) => rx.id === m.resId) || {}).home || "SCH")));
     return /* @__PURE__ */ React.createElement("div", null, (() => {
-      const medStatus = residents.map((res) => {
+      const medStatus = residents.filter((rx) => userHomeIds.includes(rx.home)).map((res) => {
         const rMeds = meds.filter((m) => m.resId === res.id && m.status === "active" && m.freq !== "PRN" && !isOnHV(res.id));
         if (rMeds.length === 0) return null;
         const overdue = rMeds.filter((m) => m.times.some((t) => {
