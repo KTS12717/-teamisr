@@ -1,1 +1,1 @@
-{"buildCommand":"echo ready","outputDirectory":"public","framework":null,"rewrites":[{"source":"/(.*)", "destination":"/index.html"}]}
+{"buildCommand":"echo ready","outputDirectory":".","framework":null}
