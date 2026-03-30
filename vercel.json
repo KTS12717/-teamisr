@@ -1,1 +1,8 @@
-{"buildCommand":"echo ready","outputDirectory":".","framework":null}
+{
+  "buildCommand": null,
+  "outputDirectory": ".",
+  "framework": null,
+  "routes": [
+    { "src": "/(.*)", "dest": "/$1" }
+  ]
+}
